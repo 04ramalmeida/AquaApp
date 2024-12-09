@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace AquaApp.Models
 {
-    public class UserTemp: IEntity
+    public class UserTemp
     {
-        public int Id { get; set; }
 
         public string FirstName { get; set; }
 
@@ -19,9 +18,5 @@ namespace AquaApp.Models
         public string Address { get; set; }
 
         public string PhoneNumber { get; set; }
-
-        public string Role { get; set; } = "Customer";
-
-        public bool IsMeterApproved { get; set; } = false;
     }
 }

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AquaApp.Pages.MyAccount"
+             Title="MyAccount"
+             NavigationPage.HasNavigationBar="False">
+    <Grid RowDefinitions="Auto,*" RowSpacing="0">
+
+        <VerticalStackLayout Grid.Row="0"
+                         BackgroundColor="Grey"
+                         VerticalOptions="Start"
+                         Spacing="1"
+                         Padding="20">
+
+            <ImageButton Source="avatar.jpg"
+                     HeightRequest="150"
+                     WidthRequest="150"
+                     CornerRadius="125"
+                     Aspect="AspectFill"
+                     x:Name="ProfilePic"
+                         Clicked="ProfilePic_Clicked"/>
+
+            <Label x:Name="UsernameLabel"
+               HorizontalOptions="Center"
+               TextColor="Black" />
+
+        </VerticalStackLayout>
+        <VerticalStackLayout Grid.Row="1"
+                         Margin="20"
+                         Spacing="20">
+
+            <Label Text="First Name"/>
+            <Entry Placeholder="First Name"
+               FontSize="12"
+               x:Name="FirstNameEntry" 
+                   IsEnabled="False"/>
+
+            <Label Text="Last Name"/>
+            <Entry Placeholder="Last Name"
+               FontSize="12"
+               x:Name="LastNameEntry" 
+                   IsEnabled="False"/>
+
+            <Label Text="Phone Number"/>
+            <Entry Placeholder="Phone Number"
+                 Keyboard="Telephone"
+                 FontSize="12"
+                 x:Name="PhoneNumberEntry" 
+                   IsEnabled="False"/>
+
+            <Label Text="Address"/>
+            <Entry Placeholder="Address"
+         FontSize="12"
+         x:Name="AddressEntry" 
+                   IsEnabled="False"/>
+            
+            
+            <Grid ColumnSpacing="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button x:Name="EditBtn" 
+                    Grid.Column="0" 
+                    Text="Edit"
+                FontSize="Small"
+                FontAttributes="Bold"
+                Clicked="EditBtn_Clicked"
+                BackgroundColor="#265DD7"
+                TextColor="Black" />
+                <Button x:Name="SaveBtn" 
+                    Grid.Column="1" 
+                Text="Save"
+            FontSize="Small"
+            FontAttributes="Bold"
+            BackgroundColor="#265DD7"
+            TextColor="Black" 
+                        IsEnabled="False"
+                        Clicked="SaveBtn_Clicked"/>
+            </Grid>
+            
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

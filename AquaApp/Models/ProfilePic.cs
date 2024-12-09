@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace AquaApp.Models
 {
-    public class Login
+    public class ProfilePic
     {
-        public string? Username { get; set; }
-
-        public string? Password { get; set; }
+        public string Url { get; set; }
     }
 }

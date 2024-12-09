@@ -1,12 +1,16 @@
-﻿namespace AquaApp
+﻿using AquaApp.Pages;
+using AquaApp.Services;
+
+namespace AquaApp
 {
     public partial class App : Application
     {
-        public App()
+        private readonly ApiService _apiService;
+        public App(ApiService apiService)
         {
             InitializeComponent();
-
-            MainPage = new AppShell();
+            _apiService = apiService;
+            MainPage = new NavigationPage(new RegisterPage(_apiService));
         }
     }
 }
