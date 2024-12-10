@@ -45,4 +45,9 @@ public partial class UserMenuPage : ContentPage
             await Navigation.PushAsync(new LoginPage(_apiService));
         }
     }
+
+    private async void about_Tapped(object sender, TappedEventArgs e)
+    {
+        await Navigation.PushAsync(new AboutPage());
+    }
 }

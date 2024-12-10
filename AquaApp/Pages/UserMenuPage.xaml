@@ -52,6 +52,17 @@
                 </HorizontalStackLayout.GestureRecognizers>
             </HorizontalStackLayout>
 
+            <Border HeightRequest="1" BackgroundColor="Gray" />
+
+            <HorizontalStackLayout Spacing="10">
+                <Label Text="About this app"
+           FontAttributes="Bold"
+           FontSize="Small" />
+                <HorizontalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="about"  Tapped="about_Tapped" />
+                </HorizontalStackLayout.GestureRecognizers>
+            </HorizontalStackLayout>
+
         </VerticalStackLayout>
     </Grid>
 </ContentPage>
