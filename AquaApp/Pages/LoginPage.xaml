@@ -46,17 +46,19 @@
                            Spacing="2"
                            HorizontalOptions="Center"
                            VerticalOptions="EndAndExpand">
-            <Label Text="Don't have an account yet? "/>
-            <Label Text="Request one." TextColor="#0079fe" FontAttributes="Bold">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer x:Name="TapRegister" Tapped="TapRegister_Tapped"/>
-                </Label.GestureRecognizers>
-            </Label>
-            <Label Text="Click here to recover your password" TextColor="#0079fe" FontAttributes="Bold">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer x:Name="TapRecover" Tapped="TapRecover_Tapped"/>
-                </Label.GestureRecognizers>
-            </Label>
+            <Grid RowDefinitions="*,*">
+                <Label Text="Don't have an account yet? Request one." TextColor="#0079fe" FontAttributes="Bold" Grid.Row="0">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="TapRegister" Tapped="TapRegister_Tapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label Text="Click here to recover your password" TextColor="#0079fe" FontAttributes="Bold" Grid.Row="1">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="TapRecover" Tapped="TapRecover_Tapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+            
         </HorizontalStackLayout>
     </Grid>
 </ContentPage>

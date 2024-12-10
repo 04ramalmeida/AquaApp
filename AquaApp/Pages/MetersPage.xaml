@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:AquaApp.Models"
+             x:Class="AquaApp.Pages.MetersPage"
+             Title="Water meters"
+             NavigationPage.HasNavigationBar="False"
+             >
+
+    <VerticalStackLayout>
+        <Label 
+            Text="My water meters"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" 
+            FontSize="Large"/>
+
+        <CollectionView x:Name="MetersList" SelectionChanged="MetersList_SelectionChanged" SelectionMode="Single">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Padding="10">
+                        <Label Text="Meter" FontSize="Medium"/>
+                        <Label Text="{Binding Id}" FontSize="Medium"/>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button x:Name="RequestBtn"
+            Text="Request a meter"
+            Clicked="RequestBtn_Clicked"/>
+    </VerticalStackLayout>
+</ContentPage>

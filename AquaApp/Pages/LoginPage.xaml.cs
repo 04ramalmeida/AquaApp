@@ -23,8 +23,7 @@ public partial class LoginPage : ContentPage
 
         if (!response.HasError)
         {
-           await DisplayAlert("Success", "Success", "Sucess");
-            await Navigation.PushAsync(new MyAccount(_apiService));
+            Application.Current!.MainPage = new AppShell(_apiService);
         }
         else
         {

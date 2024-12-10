@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AquaApp.Pages.InvoicesPage"
+             Title="Invoices">
+    <VerticalStackLayout>
+        <Label x:Name="NoneLabel"
+    Text="You've got no invoices"
+    VerticalOptions="Center" 
+    HorizontalOptions="Center"
+    FontSize="Large"
+    IsVisible="True"/>
+        <ScrollView>
+            <CollectionView x:Name="InvoicesList" IsVisible="False" SelectionMode="Single" SelectionChanged="InvoicesList_SelectionChanged">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Stroke="#d9d9d9" Margin="10" StrokeShape="RoundRectangle 10,10,10,10">
+                            <StackLayout Padding="10">
+                                <Label Text="{Binding Id,StringFormat='Invoice Number {0}'}" FontSize="Large" TextColor="Black"/>
+                                <Label Text="{Binding IsPaid,StringFormat='Is it paid: {0}'}"/>
+                                <Label Text="{Binding Date, StringFormat='Added on {0}'}" FontSize="Small"/>
+                            </StackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </ScrollView>
+    </VerticalStackLayout>
+</ContentPage>

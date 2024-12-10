@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AquaApp.Pages.AlertsPage"
+             Title="Alerts">
+    <VerticalStackLayout>
+        <Label x:Name="NoneLabel"
+            Text="You have no alerts."
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" 
+            FontSize="Large"/>
+        <ScrollView>
+            <CollectionView x:Name="AlertsList" IsVisible="False">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Stroke="#d9d9d9" Margin="10" StrokeShape="RoundRectangle 10,10,10,10">
+                            <StackLayout Padding="10">
+                                <Label Text="{Binding Id,StringFormat='Alert Number {0}'}" FontSize="Large" TextColor="Black"/>
+                                <Label Text="{Binding Title}" FontAttributes="Bold"/>
+                                <Label Text="{Binding Description}"/>
+                                <Label Text="{Binding Date, StringFormat='Added on {0}'}" FontSize="Small"/>
+                            </StackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </ScrollView>
+    </VerticalStackLayout>
+</ContentPage>

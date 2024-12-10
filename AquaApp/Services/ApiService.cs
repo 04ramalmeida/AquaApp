@@ -1,5 +1,6 @@
 ﻿using AquaApp.Models;
 using Microsoft.Extensions.Logging;
+using Microsoft.Maui.ApplicationModel.Communication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace AquaApp.Services
     public class ApiService
     {
         private readonly HttpClient _httpClient;
-        private readonly string _baseUrl = "https://qv38g7jc-7077.uks1.devtunnels.ms/";
+        private readonly string _baseUrl = "https://aquaapi-emhgeegsg3epbdce.canadacentral-01.azurewebsites.net/";
         private readonly ILogger<ApiService> _logger;
 
         JsonSerializerOptions _serializerOptions;
@@ -75,20 +76,42 @@ namespace AquaApp.Services
                     Username = userName,
                     Password = password
                 };
+
                 var json = JsonSerializer.Serialize(login, _serializerOptions);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
                 var response = await PostRequest("api/Users/Login", content);
                 if (!response.IsSuccessStatusCode)
                 {
-                    _logger.LogError($"Error sending a HTTP Request: {response.StatusCode}");
+                    _logger.LogError($"Error sending HTTP request: {response.StatusCode}");
                     return new ApiResponse<bool>
                     {
                         ErrorMessage = $"Error sending HTTP request: {response.StatusCode}"
                     };
                 }
 
-                
+                var jsonResult = await response.Content.ReadAsStringAsync();
+                var result = JsonSerializer.Deserialize<Token>(jsonResult, _serializerOptions);
+
+                Preferences.Set("isLogged", true);
+                Preferences.Set("accesstoken", result!.AccessToken);
+
+                return new ApiResponse<bool> { Data = true };
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Erro no login : {ex.Message}");
+                return new ApiResponse<bool> { ErrorMessage = ex.Message };
+            }
+        }
+
+        public async Task<ApiResponse<bool>> Logout()
+        {
+            try
+            {
+
+
+                var response = await PostRequestWithAuth("api/Users/Logout", null);
                 if (!response.IsSuccessStatusCode)
                 {
                     _logger.LogError($"Error sending a HTTP Request: {response.StatusCode}");
@@ -97,9 +120,36 @@ namespace AquaApp.Services
                         ErrorMessage = $"Error sending HTTP request: {response.StatusCode}"
                     };
                 }
-                return new ApiResponse<bool> { Data = true };
+                Preferences.Set("isLogged", false);
+                Preferences.Set("accesstoken", string.Empty);
+                return new ApiResponse<bool> { Data = false };
             }
-            catch (Exception ex) 
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error: {ex.Message}");
+                return new ApiResponse<bool> { ErrorMessage = ex.Message };
+            }
+        }
+
+        public async Task<ApiResponse<bool>> TestAuthn()
+        {
+            try
+            {
+
+
+                var response = await PostRequestWithAuth("api/Users/TestAuthn", null);
+                if (!response.IsSuccessStatusCode)
+                {
+                    _logger.LogError($"Error sending a HTTP Request: {response.StatusCode}");
+                    return new ApiResponse<bool>
+                    {
+                        ErrorMessage = $"Error sending HTTP request: {response.StatusCode}"
+                    };
+                }
+
+                return new ApiResponse<bool> { Data = false };
+            }
+            catch (Exception ex)
             {
                 _logger.LogError($"Error: {ex.Message}");
                 return new ApiResponse<bool> { ErrorMessage = ex.Message };
@@ -205,6 +255,23 @@ namespace AquaApp.Services
             }
         }
 
+        public async Task<(List<Reading>? Readings, string? ErrorMessage)> GetReadings(int meterId)
+        {
+            string endpoint = $"api/Meters/Readings?id={meterId}";
+            return await GetAsync<List<Reading>>(endpoint);
+        }
+
+        public async Task<(List<Invoice>? Invoices, string? ErrorMessage)> GetInvoices()
+        {
+            string endpoint = $"api/Invoice/GetInvoices";
+            return await GetAsync<List<Invoice>>(endpoint);
+        }
+
+        public async Task<(List<Alert>? Invoices, string? ErrorMessage)> GetAlerts()
+        {
+            string endpoint = $"api/Alert/Alerts";
+            return await GetAsync<List<Alert>>(endpoint);
+        }
 
         public async Task<ApiResponse<bool>> UploadUserImage(byte[] imageArray)
         {
@@ -231,6 +298,93 @@ namespace AquaApp.Services
                 return new ApiResponse<bool> { ErrorMessage = ex.Message };
             }
         }
+
+        public async Task<ApiResponse<bool>> RequestMeterByUser()
+        {
+            try
+            {
+
+
+                var response = await PostRequestWithAuth("api/Meters/RequestMeterByUser", null);
+                if (!response.IsSuccessStatusCode)
+                {
+                    _logger.LogError($"Error sending a HTTP Request: {response.StatusCode}");
+                    return new ApiResponse<bool>
+                    {
+                        ErrorMessage = $"Error sending HTTP request: {response.StatusCode}"
+                    };
+                }
+
+                return new ApiResponse<bool> { Data = false };
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error: {ex.Message}");
+                return new ApiResponse<bool> { ErrorMessage = ex.Message };
+            }
+        }
+
+        public async Task<ApiResponse<bool>> AddUserReading(int meterId, double usageAmount)
+        {
+            try
+            {
+                var readingInfo = new AddReading()
+                {
+                    Id = meterId,
+                    usageAmount = usageAmount
+                };
+                var json = JsonSerializer.Serialize(readingInfo, _serializerOptions);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var response = await PostRequestWithAuth("api/Meters/AddReading", content);
+                if (!response.IsSuccessStatusCode)
+                {
+                    _logger.LogError($"Error sending a HTTP Request: {response.StatusCode}");
+                    return new ApiResponse<bool>
+                    {
+                        ErrorMessage = $"Error sending HTTP request: {response.StatusCode}"
+                    };
+                }
+
+                return new ApiResponse<bool> { Data = false };
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error: {ex.Message}");
+                return new ApiResponse<bool> { ErrorMessage = ex.Message };
+            }
+        }
+
+        public async Task<ApiResponse<bool>> Pay(int invoiceId)
+        {
+            try
+            {
+                var info = new InvoicePay()
+                {
+                    Id = invoiceId
+                };
+                var json = JsonSerializer.Serialize(info, _serializerOptions);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var response = await PostRequest("api/Invoice/Pay", content);
+                if (!response.IsSuccessStatusCode)
+                {
+                    _logger.LogError($"Error sending a HTTP Request: {response.StatusCode}");
+                    return new ApiResponse<bool>
+                    {
+                        ErrorMessage = $"Error sending HTTP request: {response.StatusCode}"
+                    };
+                }
+
+                return new ApiResponse<bool> { Data = false };
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error: {ex.Message}");
+                return new ApiResponse<bool> { ErrorMessage = ex.Message };
+            }
+        }
+
         private async Task<HttpResponseMessage> PostRequest(string uri, HttpContent content)
         {
             var enderecoUrl = _baseUrl + uri;
@@ -281,6 +435,12 @@ namespace AquaApp.Services
         {
             var endpoint = $"api/Users/GetProfilePic";
             return await GetAsync<ProfilePic>(endpoint);
+        }
+
+        public async Task<(List<WaterMeter>, string? ErrorMessage)> GetMeters()
+        {
+            var endpoint = $"api/Meters/UserMeters";
+            return await GetAsync<List<WaterMeter>>(endpoint);
         }
 
         private async Task<(T? Data, string? ErrorMessage)> GetAsync<T>(string endpoint)

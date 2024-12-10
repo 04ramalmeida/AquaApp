@@ -22,7 +22,7 @@ public partial class MyAccount : ContentPage
         var userInfo = await _apiService.GetUserDetails();
         if (userInfo.ErrorMessage != null)
         {
-            DisplayAlert("Error", "Error getting user details", "Cancel");
+            await DisplayAlert("Error", "Error getting user details", "Cancel");
         }
         else
         {

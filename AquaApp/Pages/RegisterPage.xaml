@@ -15,7 +15,7 @@
                WidthRequest="150"/>
 
         <Label Grid.Row="1"
-               Text="User registration"
+               Text="Please insert your information"
                FontAttributes="Bold"
                FontSize="Medium"
                HorizontalOptions="Center"
@@ -39,7 +39,7 @@
             </VerticalStackLayout>
         </Frame>
         <Button Grid.Row="3"
-                Text="Submit"
+                Text="Submit Request"
                 FontSize="Medium"
                 BackgroundColor="#0079fe"
                 x:Name="RegisterBtn"

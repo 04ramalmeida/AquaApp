@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AquaApp.Pages.InvoiceDetailsPage"
+             Title="Invoice details">
+    <VerticalStackLayout>
+        <TableView Intent="Data">
+            <TableRoot>
+                <TableSection Title="{Binding Id, StringFormat='Invoice number {0}'}">
+                    <TextCell Text="Total value"
+                  Detail="{Binding TotalValue}" />
+                    <TextCell Text="First Echelon"
+                  Detail="{Binding FirstDecimalValue}" />
+                    <TextCell Text="Second Echelon"
+                  Detail="{Binding SecondDecimalValue}" />
+                    <TextCell Text="Third Echelon"
+                  Detail="{Binding ThirdDecimalValue}" />
+                    <TextCell Text="Fourth Echelon"
+                  Detail="{Binding FourthDecimalValue}" />
+                    <TextCell Text="Is it paid?"
+                 Detail="{Binding IsPaid}" />
+                    <TextCell Text="Added on"
+                Detail="{Binding Date}" />
+                </TableSection>
+            </TableRoot>
+        </TableView>
+        <Button x:Name="PayBtn" BackgroundColor="Green" Text="Pay" IsVisible="True" Clicked="PayBtn_Clicked" Margin="10"/>
+    </VerticalStackLayout>
+    
+</ContentPage>

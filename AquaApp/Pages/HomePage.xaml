@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AquaApp.Pages.HomePage"
+             Title="HomePage"
+             NavigationPage.HasNavigationBar="False">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" HorizontalOptions="Center">
+            <Image 
+Source="wave.png"
+Aspect="AspectFit"
+HeightRequest="150"
+WidthRequest="150"/>
+
+            <Label 
+     Text="Welcome to AQUA!"
+     VerticalOptions="Center" 
+     HorizontalOptions="Center"
+     FontSize="Large"
+     FontAttributes="Bold"/>
+
+            <Label 
+Text="The most humanitarian and environmental water company!"
+FontSize="16"
+/>
+            <Label 
+Text="Why should you join us?"
+VerticalOptions="Center" 
+HorizontalOptions="Center"
+FontSize="Medium"
+FontAttributes="Bold"/>
+            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+
+                <Frame Grid.Row="0"
+               WidthRequest="300" 
+                    HorizontalOptions="Center"
+
+                    VerticalOptions="FillAndExpand">
+                    <StackLayout>
+                        <Label Text="Cheaper prices" 
+HorizontalOptions="Center" 
+VerticalOptions="Center" 
+        FontAttributes="Bold"/>
+                        <Label Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vehicula sit amet nisl ac hendrerit." 
+HorizontalOptions="Center" 
+VerticalOptions="Center" 
+        />
+
+                    </StackLayout>
+                </Frame>
+
+
+                <Frame Grid.Row="1"
+               WidthRequest="300"  
+                    HorizontalOptions="Center"
+                    VerticalOptions="FillAndExpand">
+                    <StackLayout>
+                        <Label Text="Humanitarianism" 
+HorizontalOptions="Center" 
+VerticalOptions="Center" 
+        FontAttributes="Bold"/>
+                        <Label Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vehicula sit amet nisl ac hendrerit." 
+HorizontalOptions="Center" 
+VerticalOptions="Center" 
+        />
+
+                    </StackLayout>
+                </Frame>
+
+
+                <Frame Grid.Row="2"
+               WidthRequest="300"  
+                    HorizontalOptions="Center"
+                    VerticalOptions="FillAndExpand">
+                    <StackLayout>
+                        <Label Text="Environmentalism" 
+HorizontalOptions="Center" 
+VerticalOptions="Center" 
+        FontAttributes="Bold"/>
+                        <Label Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vehicula sit amet nisl ac hendrerit." 
+HorizontalOptions="Center" 
+VerticalOptions="Center" 
+        />
+
+                    </StackLayout>
+                </Frame>
+            </Grid>
+
+            <Label Text="Prices"
+                   HorizontalOptions="Center"
+                   FontSize="Large"
+                   FontAttributes="Bold"/>
+            <Grid RowSpacing="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Frame Grid.Row="0"
+                       BackgroundColor="#0079fe"
+            WidthRequest="150"
+                       HeightRequest="150"
+     HorizontalOptions="Center"
+     VerticalOptions="FillAndExpand">
+                    <StackLayout>
+                        <Label Text="1st Echelon" TextColor="White"
+HorizontalOptions="Center" 
+VerticalOptions="Center" 
+        FontAttributes="Bold"/>
+                        <Label Text="0,30€ per meter" TextColor="White"
+HorizontalOptions="Center" 
+VerticalOptions="Center" 
+        />
+                    </StackLayout>
+                </Frame>
+
+                <Frame Grid.Row="1"
+                       BackgroundColor="#0079fe"
+    WidthRequest="150"
+           HeightRequest="150"
+HorizontalOptions="Center"
+VerticalOptions="FillAndExpand">
+                    <StackLayout>
+                        <Label Text="3rd Echelon" TextColor="White"
+HorizontalOptions="Center" 
+VerticalOptions="Center" 
+        FontAttributes="Bold"/>
+                        <Label Text="1,20€ per meter" TextColor="White"
+HorizontalOptions="Center" 
+VerticalOptions="Center" 
+        />
+                    </StackLayout>
+                </Frame>
+
+                <Frame Grid.Row="0"
+                       Grid.Column="1"
+                       BackgroundColor="#0079fe"
+  WidthRequest="150"
+           HeightRequest="150"
+HorizontalOptions="Center"
+VerticalOptions="FillAndExpand">
+                    <StackLayout>
+                        <Label Text="2nd Echelon" TextColor="White"
+HorizontalOptions="Center" 
+VerticalOptions="Center" 
+        FontAttributes="Bold"/>
+                        <Label Text="0,80€ per meter" TextColor="White"
+HorizontalOptions="Center" 
+VerticalOptions="Center" 
+        />
+                    </StackLayout>
+                </Frame>
+
+                <Frame Grid.Row="1"
+                       Grid.Column="1"
+                       BackgroundColor="#0079fe"
+  WidthRequest="150"
+           HeightRequest="150"
+HorizontalOptions="Center"
+VerticalOptions="FillAndExpand">
+                    <StackLayout>
+                        <Label Text="3rd Echelon" TextColor="White"
+HorizontalOptions="Center" 
+VerticalOptions="Center" 
+        FontAttributes="Bold"/>
+                        <Label Text="1,60€ per meter" TextColor="White"
+HorizontalOptions="Center" 
+VerticalOptions="Center" 
+        />
+                    </StackLayout>
+                </Frame>
+            </Grid>
+
+            <Label Text="What are you waiting for?"
+                   FontSize="Large"
+                   FontAttributes="Bold"/>
+            <Button x:Name="RequestBtn"  Text="Request a meter now!"
+                    BackgroundColor="#0079fe"
+                    Margin="20"
+                    Clicked="RequestBtn_Clicked"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -10,7 +10,8 @@ namespace AquaApp
         {
             InitializeComponent();
             _apiService = apiService;
-            MainPage = new NavigationPage(new RegisterPage(_apiService));
+            MainPage = new NavigationPage(new HomePage(_apiService));
+
         }
     }
 }
