@@ -53,11 +53,6 @@ public partial class MyAccount : ContentPage
         return defaultImage;
     }
 
-    private async void Button_Clicked(object sender, EventArgs e)
-    {
-        
-        DisplayAlert("Hi", "Hi", "OK");
-    }
 
     private void EditBtn_Clicked(object sender, EventArgs e)
     {
@@ -82,7 +77,7 @@ public partial class MyAccount : ContentPage
 
         if (!response.HasError)
         {
-            await DisplayAlert("Success", "Success", "Sucess");
+            await DisplayAlert("Success", "Your information has been updated.", "OK");
             await Navigation.PushAsync(new MyAccount(_apiService));
         }
         else

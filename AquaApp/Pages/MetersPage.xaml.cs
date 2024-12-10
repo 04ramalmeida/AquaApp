@@ -49,7 +49,7 @@ public partial class MetersPage : ContentPage
         }
         else
         {
-            await Navigation.PushAsync(new MeterReadingsPage(_apiService, response.Readings));
+            await Navigation.PushAsync(new MeterReadingsPage(_apiService, response.Readings, tappedMeter.Id));
         }
         
     }

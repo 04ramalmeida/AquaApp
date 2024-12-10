@@ -7,12 +7,14 @@ public partial class MeterReadingsPage : ContentPage
 {
 	private readonly ApiService _apiService;
 	private readonly List<Reading> _readings;
-    public MeterReadingsPage(ApiService apiService, List<Reading> readings)
+    private readonly int _meterId;
+    public MeterReadingsPage(ApiService apiService, List<Reading> readings, int meterId)
     {
         InitializeComponent();
         _apiService = apiService;
         _readings = readings;
         BindingContext = this;
+        _meterId = meterId;
     }
 
     protected override async void OnAppearing()
@@ -30,7 +32,6 @@ public partial class MeterReadingsPage : ContentPage
 
     private async void AddBtn_Clicked(object sender, EventArgs e)
     {
-        var meterId = _readings.FirstOrDefault().WaterMeter.Id;
-        await Navigation.PushAsync(new AddReadingPage(_apiService, meterId));
+        await Navigation.PushAsync(new AddReadingPage(_apiService, _meterId));
     }
 }
